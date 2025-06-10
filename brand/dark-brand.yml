@@ -1,0 +1,35 @@
+color:
+  palette:
+    light-grey: "#c5c5c5"
+    medium-grey: "#949494"
+    dark-grey: "#323232"
+    blue: "#3564b0"
+  foreground: light-grey
+  background: dark-grey
+  primary: medium-grey
+  secondary: medium-grey
+
+logo: 
+  images:
+    user-logo: 
+      path: logo.png
+      alt: "useR! 2025 logo with a bull, for Bull City Durham, NC, in Duke blue color."
+  small: user-logo
+
+typography:
+  fonts:
+    - family: Atkinson Hyperlegible
+      source: google
+  base: Atkinson Hyperlegible
+  headings: Atkinson Hyperlegible
+
+defaults:
+  bootstrap:
+    rules: |
+      .nav-tabs .nav-link.active {
+        color: #c5c5c5;
+      }
+      .card-body {
+        color: #ffffff;
+        font-size: "1.3em";
+      }
