@@ -3,6 +3,7 @@ title: "Quarto Dashboards: from zero to publish in one hour"
 author: Mine Çetinkaya-Rundel
 institute: Duke University + Posit, PBC
 logo: images/quarto-logo.png
+footer: "🔗 [mine.quarto.pub/quarto-dashboards-rmed](https://mine.quarto.pub/quarto-dashboards-rmed)"
 format:
   revealjs:
     theme: slides.scss
@@ -61,11 +62,11 @@ quarto --version
 
 ## useR! 2025 dashboard
 
-::: .center
+::: {.center-align}
 🔗 [https://mine.quarto.pub/user-2025-dash/](https://mine.quarto.pub/user-2025-dash//)
-:::
 
-![](images/user-2025-dash.png)
+![](images/user-2025-dash.png){width=800px}
+:::
 
 # Dashboard basics
 
@@ -316,18 +317,23 @@ If you would like to follow along or work on it yourself later
 
 -   Start modifying `useR25-start.qmd` to build your dashboard.
 
-## 🎯 Goal
+## 🎯 Goal {.nostretch}
 
 Our goal is to create the following dashboard and then deploy to QuartoPub.
 
-![](images/user-2025-dash.png)
+![](images/user-2025-dash.png){width=750px fig-align="center"}
 
-## Thank you!
+## Thank you! {.nostretch}
 
-If you're interested in participating in the R/Medicine & Posit Raffle, where you can win
+If you're interested in participating in the R/Medicine & Posit Raffle, where you can win:
 
+::: columns
+::: column
 - **Care package of hex stickers** featuring all of your favorite R or Python packages 📦✨
 
 - **Dedicated time** with the **Great Tables** team (Michael Chow & Rich Iannone) to ask questions, get tips, or just chat about beautiful tables!
-
-![](images/raffle-qr-code.png)
+:::
+::: {.column .center-align}
+![](images/raffle-qr-code.png){width=350px}
+:::
+:::
