@@ -21,7 +21,6 @@ typography:
     - family: Atkinson Hyperlegible
       source: google
   base: Atkinson Hyperlegible
-  headings: Atkinson Hyperlegible
 
 defaults:
   bootstrap:
