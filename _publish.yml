@@ -2,3 +2,7 @@
   quarto-pub:
     - id: e3108888-3cc9-4c76-a5ab-78f9bdcb2826
       url: https://mine.quarto.pub/user-2025-dash
+- source: index.qmd
+  quarto-pub:
+    - id: b377da6d-c895-4ae2-b3cc-f8bf14f01df2
+      url: https://mine.quarto.pub/quarto-dashboards-rmed
