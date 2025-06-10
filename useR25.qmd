@@ -26,13 +26,16 @@ program <- read_csv("data/program.csv")
 ```{r}
 #| label: make-schedule
 #| include: false
-make_schedule <- function(x){
+make_schedule <- function(x, color){
+  
+  fill_color <- paste0(color, "50")
+
   x |>
   gt(rowname_col = "time", groupname_col = "session") |>
   fmt_markdown(columns = c(info, speakers)) |>
   tab_style(
     style = list(
-      cell_fill(color = "#2165b650"), 
+      cell_fill(color = fill_color), 
       cell_text(weight = "bold", size = "120%")
     ),
     cells_row_groups()
@@ -132,9 +135,6 @@ list(
   value = program_inperson_counts |> filter(session_simplified == "Poster") |> pull(n)
 )
 ```
-
-:::
-
 
 ### Row - Themes {height="70%"}
 
@@ -249,7 +249,7 @@ The following talks are virtual and will be streamed on YouTube Live.
 #| label: virtual-schedule
 #| html-table-processing: none
 virtual |>
-  make_schedule() |>
+  make_schedule(color = "#65b621") |>
   cols_hide(columns = room)
 ```
 :::
@@ -268,7 +268,7 @@ bind_rows(
   day_1 |> filter(session == "Poster")
 ) |>
   mutate(room = if_else(session == "Keynote #1", "Gross Hall 270", room)) |>
-  make_schedule()
+  make_schedule(color = "#2165b6")
 ```
 :::
 
@@ -279,7 +279,7 @@ The following tutorials and posters will be presented in person at Duke Universi
 ```{r}
 #| label: day2-schedule
 #| html-table-processing: none
-make_schedule(day_2)
+make_schedule(day_2, color = "#2165b6")
 ```
 :::
 
@@ -290,7 +290,7 @@ The following tutorials and posters will be presented in person at Duke Universi
 ```{r}
 #| label: day3-schedule
 #| html-table-processing: none
-make_schedule(day_3)
+make_schedule(day_3, color = "#2165b6")
 ```
 :::
 
