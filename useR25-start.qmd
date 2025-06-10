@@ -1,13 +1,9 @@
 ---
 title: "useR! 2025"
-format: 
-  dashboard:
-    nav-buttons:
-      - icon: github
-        href: https://github.com/mine-cetinkaya-rundel/quarto-dashboards-rmed/blob/main/useR25.qmd
-brand:
-  light: brand/light-brand.yml
-  dark: brand/dark-brand.yml
+format: html
+toc: true
+execute:
+  warning: false
 ---
 
 ```{r}
@@ -22,6 +18,30 @@ set.seed(1234)
 ```{r}
 #| label: load-data
 program <- read_csv("data/program.csv")
+```
+
+```{r}
+#| label: colors
+
+# yellow
+keynote_color <- "#FFD960"
+
+# blue
+blue <- "#2165B6"
+tutorial_color <- paste0(blue, "80")
+talk_color <- paste0(blue, "60")
+lightning_talk_color <- paste0(blue, "20")
+light_blue <- "#A0b9E2"
+
+# grey
+poster_color <- "#E2E6ED50"
+dark_grey <- "#323232"
+
+# green
+green <- "#65B621"
+virtual_talk_color <- paste0(green, "60")
+virtual_lightning_talk_color <- paste0(green, "20")
+light_green <- "#C0ED9B"
 ```
 
 ```{r}
@@ -58,35 +78,11 @@ make_schedule <- function(x, color){
 }
 ```
 
-```{r}
-#| label: helper-gt-theme-dark-mod
-gt_theme_dark_alt <- function(gt_object, ...) {
-  gt_object |>
-    tab_options(
-      table.background.color = "#323232",
-      table.font.color.light = "white",
-      table.border.bottom.color = "#323232",
-      table.border.left.color = "#323232",
-      table.border.right.color = "#323232",
-      table_body.border.bottom.color = "#323232",
-      column_labels.background.color = "#323232",
-      column_labels.border.bottom.color = "white",
-      ...
-    )
-}
-```
+# Overview
 
-# Overview {orientation="columns"}
+## In-person program
 
-## Column - In-person {width="70%"}
-
-### Row - Title {height="5%"}
-
-::: {.card expandable="false"}
-**In-person program**
-:::
-
-### Row - Value boxes {height="30%"}
+### Counts
 
 ```{r}
 #| label: valuebox-values-inperson
@@ -107,76 +103,13 @@ program_inperson <- program |>
 program_inperson_counts <- program_inperson |>
   count(session_simplified)
 
-keynote_color <- "#FFD960"
-tutorial_color <- "#2165b680"
-talk_color <- "#2165b660"
-lightning_talk_color <- "#2165b620"
-poster_color <- "#E2E6ED50"
+program_inperson_counts
 ```
 
-```{r}
-#| label: valuebox-keynotes
-#| content: valuebox
-#| title: "Keynotes"
-list(
-  icon = "mic-fill",
-  color = keynote_color,
-  value = program_inperson_counts |> filter(session_simplified == "Keynote") |> pull(n)
-)
-```
-
-```{r}
-#| label: valuebox-tutorials
-#| content: valuebox
-#| title: "Tutorials"
-list(
-  icon = "code-square",
-  color = tutorial_color,
-  value = program_inperson_counts |> filter(session_simplified == "Tutorial") |> pull(n)
-)
-```
-
-```{r}
-#| label: valuebox-talks
-#| content: valuebox
-#| title: "Talks"
-list(
-  icon = "mic",
-  color = talk_color,
-  value = program_inperson_counts |> filter(session_simplified == "Talk") |> pull(n)
-)
-```
-
-```{r}
-#| label: valuebox-lightning-talks
-#| content: valuebox
-#| title: "Lightning talks"
-list(
-  icon = "lightning",
-  color = lightning_talk_color,
-  value = program_inperson_counts |> filter(session_simplified == "Lightning talk") |> pull(n)
-)
-```
-
-```{r}
-#| label: valuebox-posters
-#| content: valuebox
-#| title: "Posters"
-list(
-  icon = "clipboard",
-  color = poster_color,
-  value = program_inperson_counts |> filter(session_simplified == "Poster") |> pull(n)
-)
-```
-
-### Row - Plots: Daily counts {height="30%"}
+### Daily counts
 
 ```{r}
 #| label: session-counts-per-day-inperson
-#| title: Daily session counts
-#| renderings: [light, dark]
-#| fig-height: 1.75
-#| fig-width: 10
 session_counts_per_day_inperson_plot <- program_inperson |>
   count(date, session_simplified) |>
   mutate(
@@ -187,7 +120,7 @@ session_counts_per_day_inperson_plot <- program_inperson |>
     )
   ) |>
   ggplot(aes(y = fct_rev(session_simplified), x = n, fill = session_simplified)) +
-  geom_col(show.legend = FALSE, color = "#2165b6") +
+  geom_col(show.legend = FALSE, color = blue) +
   facet_wrap(~date, ncol = 3) +
   labs(x = NULL, y = NULL) +
   scale_fill_manual(
@@ -202,29 +135,16 @@ session_counts_per_day_inperson_plot <- program_inperson |>
   theme_minimal() +
   theme(
     panel.grid.major.y = element_blank(),
-    strip.background = element_rect(fill = poster_color, color = "#FFFFFF")
+    strip.background = element_rect(fill = poster_color, color = "white")
   )
 
-# light
 session_counts_per_day_inperson_plot
-
-# dark
-session_counts_per_day_inperson_plot +
-  theme(
-    plot.background = element_rect(fill = "#323232", color = "#323232"),
-    axis.text.y = element_text(color = "#ffffff"),
-    strip.text = element_text(color = "#ffffff")
-  )
 ```
 
-### Row - Plots: Themes {height="40%"}
+### Themes
 
 ```{r}
 #| label: keyword-wordcloud-inperson
-#| title: Emerging themes
-#| renderings: [light, dark]
-#| fig-height: 2.5
-#| fig-width: 8
 program_inperson_themes <- program_inperson |>
   separate_longer_delim(keywords, delim = ", ") |>
   mutate(keywords = str_trim(keywords)) |>
@@ -238,25 +158,13 @@ ggplot(program_inperson_themes, aes(label = keywords, size = n, color = n)) +
   scale_size_area(max_size = 30) +
   theme_void()
 
-# light
 keyword_wordcloud_inperson_plot +
-  scale_color_gradient(low = "#81a3d9", high = "#3564b0")
-
-# dark
-keyword_wordcloud_inperson_plot +
-  theme(plot.background = element_rect(fill = "#323232", color = "#323232")) +
-  scale_color_gradient(low = "#81a3d9", high = "#ffffff")
+  scale_color_gradient(low = light_blue, high = blue)
 ```
 
-## Column - Virtual {width="30%"}
+## Virtual program
 
-### Row - Title {height="5%"}
-
-::: {.card expandable="false"}
-**Virtual program**
-:::
-
-### Row - Value box 1 {height="20%"}
+### Counts
 
 ```{r}
 #| label: valuebox-values-virtual
@@ -265,40 +173,14 @@ program_virtual <- program |>
 
 program_virtual_counts <- program_virtual |>
   count(session)
+
+program_virtual_counts
 ```
 
-```{r}
-#| label: valuebox-virtual-talks
-#| content: valuebox
-#| title: "Talks"
-list(
-  icon = "mic",
-  color = "#65b62160",
-  value = program_virtual_counts |> filter(session == "Virtual") |> pull(n)
-)
-```
-
-### Row - Value box 2 {height="20%"}
-
-```{r}
-#| label: valuebox-virtual-lightning-talks
-#| content: valuebox
-#| title: "Lightning Talks"
-list(
-  icon = "lightning",
-  color = "#65b62120",
-  value = program_virtual_counts |> filter(session == "Virtual Lightning") |> pull(n)
-)
-```
-
-### Row - Plots {height="55%"}
+### Themes
 
 ```{r}
 #| label: keyword-wordcloud-virtual
-#| title: Emerging themes
-#| renderings: [light, dark]
-#| fig-height: 4
-#| fig-width: 8
 program_virtual_themes <- program_virtual |>
   separate_longer_delim(keywords, delim = ", ") |>
   mutate(keywords = str_trim(keywords)) |>
@@ -311,23 +193,13 @@ keyword_wordcloud_virtual_plot <- ggplot(program_virtual_themes, aes(label = key
   scale_size_area(max_size = 50) +
   theme_minimal()
 
-# light
 keyword_wordcloud_virtual_plot +
-  scale_color_gradient(low = "#b6ea8a", high = "#65b621")
-
-# dark
-keyword_wordcloud_virtual_plot +
-  scale_color_gradient(low = "#b6ea8a", high = "#ffffff") +
-  theme(plot.background = element_rect(fill = "#323232", color = "#323232"))
+  scale_color_gradient(low = light_green, high = green)
 ```
 
 # Schedule
 
-## Row - Info
-
 Please note that all session times are listed below in EDT and the schedule is subject to change.
-
-## Row - Tabsets of tables {.tabset}
 
 ```{r}
 #| label: split-days
@@ -337,34 +209,26 @@ day_2   <- program |> filter(date == "2025-08-09") |> select(!c(date, keywords))
 day_3   <- program |> filter(date == "2025-08-10") |> select(!c(date, keywords))
 ```
 
-::: {.card title="Virtual - August 1, 2025"}
+## Virtual - August 1, 2025
+
 The following talks are virtual and will be streamed on YouTube Live.
 
 ```{r}
 #| label: virtual-schedule
 #| html-table-processing: none
-#| renderings: [light, dark]
 
-# light
 virtual |>
-  make_schedule(color = "#65b621") |>
+  make_schedule(color = green) |>
   cols_hide(columns = room)
-
-# dark
-virtual |>
-  make_schedule(color = "#65b621") |>
-  cols_hide(columns = room) |>
-  gt_theme_dark_alt()
 ```
-:::
 
-::: {.card title="Day 1 - August 8, 2025"}
+## Day 1 - August 8, 2025
+
 The following tutorials and posters will be presented in person at Duke University, Durham, NC.
 
 ```{r}
 #| label: day1-schedule
 #| html-table-processing: none
-#| renderings: [light, dark]
 day_1_updated <- bind_rows(
   day_1 |> filter(session == "Morning tutorial"),
   day_1 |> filter(session == "Afternoon tutorial"),
@@ -373,45 +237,25 @@ day_1_updated <- bind_rows(
 ) |>
   mutate(room = if_else(session == "Keynote #1", "Gross Hall 270", room))
 
-# light
-make_schedule(day_1_updated, color = "#2165b6")
-
-# dark
-make_schedule(day_1_updated, color = "#2165b6") |>
-  gt_theme_dark_alt()
+make_schedule(day_1_updated, color = blue)
 ```
-:::
 
-::: {.card title="Day 2 - August 9, 2025"}
+## Day 2 - August 9, 2025
+
 The following tutorials and posters will be presented in person at Duke University, Durham, NC.
 
 ```{r}
 #| label: day2-schedule
 #| html-table-processing: none
-#| renderings: [light, dark]
-
-# light
-make_schedule(day_2, color = "#2165b6")
-
-# dark
-make_schedule(day_2, color = "#2165b6") |>
-  gt_theme_dark_alt()
+make_schedule(day_2, color = blue)
 ```
-:::
 
-::: {.card title="Day 3 - August 10, 2025"}
+## Day 3 - August 10, 2025
+
 The following tutorials and posters will be presented in person at Duke University, Durham, NC.
 
 ```{r}
 #| label: day3-schedule
 #| html-table-processing: none
-#| renderings: [light, dark]
-
-# light
-make_schedule(day_3, color = "#2165b6")
-
-# dark
-make_schedule(day_3, color = "#2165b6") |>
-  gt_theme_dark_alt()
+make_schedule(day_3, color = blue)
 ```
-:::
