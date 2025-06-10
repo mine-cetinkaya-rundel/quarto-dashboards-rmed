@@ -242,7 +242,6 @@ day_3   <- program |> filter(date == "2025-08-10") |> select(!c(date, keywords))
 ```
 
 ::: {.card title="August 1, 2025 - Virtual"}
-
 The following talks are virtual and will be streamed on YouTube Live.
 
 ```{r}
@@ -255,7 +254,6 @@ virtual |>
 :::
 
 ::: {.card title="August 8, 2025 - Day 1"}
-
 The following tutorials and posters will be presented in person at Duke University, Durham, NC.
 
 ```{r}
@@ -273,7 +271,6 @@ bind_rows(
 :::
 
 ::: {.card title="August 9, 2025 - Day 2"}
-
 The following tutorials and posters will be presented in person at Duke University, Durham, NC.
 
 ```{r}
@@ -284,7 +281,6 @@ make_schedule(day_2, color = "#2165b6")
 :::
 
 ::: {.card title="August 10, 2025 - Day 3"}
-
 The following tutorials and posters will be presented in person at Duke University, Durham, NC.
 
 ```{r}
@@ -293,4 +289,3 @@ The following tutorials and posters will be presented in person at Duke Universi
 make_schedule(day_3, color = "#2165b6")
 ```
 :::
-
