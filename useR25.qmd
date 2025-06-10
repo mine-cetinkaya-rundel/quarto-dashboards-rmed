@@ -16,6 +16,7 @@ library(tidyverse)
 library(gt)
 library(scales)
 library(ggwordcloud)
+set.seed(1234)
 ```
 
 ```{r}
