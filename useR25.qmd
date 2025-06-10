@@ -169,14 +169,14 @@ list(
 )
 ```
 
-### Row - Plots {height="70%"}
-
-#### Column - Daily counts {width="50%"}
+### Row - Plots: Daily counts {height="30%"}
 
 ```{r}
 #| label: session-counts-per-day-inperson
 #| title: Daily session counts
 #| renderings: [light, dark]
+#| fig-height: 1.75
+#| fig-width: 10
 session_counts_per_day_inperson_plot <- program_inperson |>
   count(date, session_simplified) |>
   mutate(
@@ -188,7 +188,7 @@ session_counts_per_day_inperson_plot <- program_inperson |>
   ) |>
   ggplot(aes(y = fct_rev(session_simplified), x = n, fill = session_simplified)) +
   geom_col(show.legend = FALSE, color = "#2165b6") +
-  facet_wrap(~date, ncol = 1) +
+  facet_wrap(~date, ncol = 3) +
   labs(x = NULL, y = NULL) +
   scale_fill_manual(
     values = c(
@@ -217,12 +217,14 @@ session_counts_per_day_inperson_plot +
   )
 ```
 
-#### Column - Themes {width="50%"}
+### Row - Plots: Themes {height="40%"}
 
 ```{r}
 #| label: keyword-wordcloud-inperson
 #| title: Emerging themes
 #| renderings: [light, dark]
+#| fig-height: 2.5
+#| fig-width: 8
 program_inperson_themes <- program_inperson |>
   separate_longer_delim(keywords, delim = ", ") |>
   mutate(keywords = str_trim(keywords)) |>
@@ -233,7 +235,7 @@ program_inperson_themes <- program_inperson |>
 keyword_wordcloud_inperson_plot <- 
 ggplot(program_inperson_themes, aes(label = keywords, size = n, color = n)) +
   geom_text_wordcloud_area(rm_outside = TRUE) +
-  scale_size_area(max_size = 60) +
+  scale_size_area(max_size = 30) +
   theme_void()
 
 # light
@@ -254,7 +256,7 @@ keyword_wordcloud_inperson_plot +
 **Virtual program**
 :::
 
-### Row - Value box 1 {height="15%"}
+### Row - Value box 1 {height="20%"}
 
 ```{r}
 #| label: valuebox-values-virtual
@@ -276,7 +278,7 @@ list(
 )
 ```
 
-### Row - Value box 2 {height="15%"}
+### Row - Value box 2 {height="20%"}
 
 ```{r}
 #| label: valuebox-virtual-lightning-talks
@@ -289,12 +291,14 @@ list(
 )
 ```
 
-### Row - Plots {height="65%"}
+### Row - Plots {height="55%"}
 
 ```{r}
 #| label: keyword-wordcloud-virtual
 #| title: Emerging themes
 #| renderings: [light, dark]
+#| fig-height: 4
+#| fig-width: 8
 program_virtual_themes <- program_virtual |>
   separate_longer_delim(keywords, delim = ", ") |>
   mutate(keywords = str_trim(keywords)) |>
