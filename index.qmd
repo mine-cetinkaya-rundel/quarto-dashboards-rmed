@@ -131,18 +131,15 @@ We'll use R for the computation for building this dashboard, but (just about) ev
 
 ## Step 1: `format: dashboard` {auto-animate="true"}
 
-::: r-box
 ``` {.yaml filename="dashboard-r.qmd"}
 ---
 title: "My first Quarto dashboard"
 format: dashboard
 ---
 ```
-:::
 
 ## Step 2: Add a card {auto-animate="true"}
 
-::: r-box
 ```` {.yaml filename="dashboard-r.qmd" code-line-numbers="|10-13"}
 ---
 title: "My first Quarto dashboard"
@@ -158,13 +155,11 @@ ggplot(mpg, aes(x = cty, y = hwy)) +
   geom_point()
 ```
 ````
-:::
 
 ## Step 2: Add a card {.smaller auto-animate="true"}
 
 ::: columns
 ::: {.column width="40%"}
-::: r-box
 ```` {.yaml filename="dashboard-r.qmd"}
 ---
 title: "My first Quarto dashboard"
@@ -181,7 +176,6 @@ ggplot(mpg, aes(x = cty, y = hwy)) +
 ```
 ````
 :::
-:::
 
 ::: {.column width="60%"}
 ![](images/first-dashboard-r-1.png)
@@ -190,7 +184,6 @@ ggplot(mpg, aes(x = cty, y = hwy)) +
 
 ## Step 3: Add another card {auto-animate="true"}
 
-::: r-box
 ```` {.yaml filename="dashboard-r.qmd" code-line-numbers="|15-18"}
 ---
 title: "My first Quarto dashboard"
@@ -211,13 +204,11 @@ ggplot(mpg, aes(x = drv)) +
   geom_bar()
 ```
 ````
-:::
 
 ## Step 3: Add another card {.smaller auto-animate="true"}
 
 ::: columns
 ::: {.column width="40%"}
-::: r-box
 ```` {.yaml filename="dashboard-r.qmd"}
 ---
 title: "My first Quarto dashboard"
@@ -239,7 +230,6 @@ ggplot(mpg, aes(x = drv)) +
 ```
 ````
 :::
-:::
 
 ::: {.column width="60%"}
 ![](images/first-dashboard-r-2.png)
@@ -248,7 +238,6 @@ ggplot(mpg, aes(x = drv)) +
 
 ## Step 4: Add titles to cards {auto-animate="true"}
 
-::: r-box
 ```` {.yaml filename="dashboard-r.qmd" code-line-numbers="|11,17"}
 ---
 title: "My first Quarto dashboard"
@@ -271,13 +260,11 @@ ggplot(mpg, aes(x = drv)) +
   geom_bar()
 ```
 ````
-:::
 
 ## Step 4: Add titles to cards {.smaller auto-animate="true"}
 
 ::: columns
 ::: {.column width="40%"}
-::: r-box
 ```` {.yaml filename="dashboard-r.qmd"}
 ---
 title: "My first Quarto dashboard"
@@ -300,7 +287,6 @@ ggplot(mpg, aes(x = drv)) +
   geom_bar()
 ```
 ````
-:::
 :::
 
 ::: {.column width="60%"}
@@ -336,6 +322,16 @@ If you would like to follow along or work on it yourself later
 
 Our goal is to create the following dashboard and then deploy to QuartoPub.
 
-::: r-box
-![](images/useR-2025-dash.png)
-:::
+```{=html}
+<iframe src="https://mine.quarto.pub/user-2025-dash/" title = "useR! 2025 dashboard" frameborder="1" height="575" width="1200"></iframe>
+```
+
+## Thank you!
+
+If you're interested in participating in the R/Medicine & Posit Raffle, where you can win
+
+- **Care package of hex stickers** featuring all of your favorite R or Python packages 📦✨
+
+- **Dedicated time** with the **Great Tables** team (Michael Chow & Rich Iannone) to ask questions, get tips, or just chat about beautiful tables!
+
+![](images/raffle-qr-code.png)
