@@ -16,6 +16,7 @@ library(tidyverse)
 library(gt)
 library(scales)
 library(ggwordcloud)
+library(gtExtras)
 set.seed(1234)
 ```
 
@@ -248,9 +249,15 @@ The following talks are virtual and will be streamed on YouTube Live.
 ```{r}
 #| label: virtual-schedule
 #| html-table-processing: none
+#| renderings: [light, dark]
 virtual |>
   make_schedule(color = "#65b621") |>
   cols_hide(columns = room)
+
+virtual |>
+  make_schedule(color = "#65b621") |>
+  cols_hide(columns = room) |>
+  gt_theme_dark()
 ```
 :::
 
@@ -260,14 +267,19 @@ The following tutorials and posters will be presented in person at Duke Universi
 ```{r}
 #| label: day1-schedule
 #| html-table-processing: none
-bind_rows(
+#| renderings: [light, dark]
+day_1_updated <- bind_rows(
   day_1 |> filter(session == "Morning tutorial"),
   day_1 |> filter(session == "Afternoon tutorial"),
   day_1 |> filter(session == "Keynote #1"),
   day_1 |> filter(session == "Poster")
 ) |>
-  mutate(room = if_else(session == "Keynote #1", "Gross Hall 270", room)) |>
-  make_schedule(color = "#2165b6")
+  mutate(room = if_else(session == "Keynote #1", "Gross Hall 270", room))
+
+make_schedule(day_1_updated, color = "#2165b6")
+
+make_schedule(day_1_updated, color = "#2165b6") |>
+  gt_theme_dark()
 ```
 :::
 
@@ -277,7 +289,11 @@ The following tutorials and posters will be presented in person at Duke Universi
 ```{r}
 #| label: day2-schedule
 #| html-table-processing: none
+#| renderings: [light, dark]
 make_schedule(day_2, color = "#2165b6")
+
+make_schedule(day_2, color = "#2165b6") |>
+  gt_theme_dark()
 ```
 :::
 
@@ -287,6 +303,7 @@ The following tutorials and posters will be presented in person at Duke Universi
 ```{r}
 #| label: day3-schedule
 #| html-table-processing: none
-make_schedule(day_3, color = "#2165b6")
+make_schedule(day_3, color = "#2165b6") |>
+  gt_theme_dark()
 ```
 :::
