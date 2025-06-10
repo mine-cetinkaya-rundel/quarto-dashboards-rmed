@@ -59,15 +59,13 @@ quarto --version
 
 ##  {.no-line background-image="images/dashboards/stock-explorer.png" background-size="contain"}
 
-## useR! 2025 dashboard {.smaller}
+## useR! 2025 dashboard
 
 ::: .center
 🔗 [https://mine.quarto.pub/user-2025-dash/](https://mine.quarto.pub/user-2025-dash//)
 :::
 
-```{=html}
-<iframe src="https://mine.quarto.pub/user-2025-dash/" title = "useR! 2025 dashboard" frameborder="1" height="575" width="1200"></iframe>
-```
+![](images/user-2025-dash.png)
 
 # Dashboard basics
 
@@ -302,11 +300,11 @@ ggplot(mpg, aes(x = drv)) +
 
 ## Materials
 
--   Slides for this intro: [mine.quarto.pub/quarto-dashboards-rmed](https://mine.quarto.pub/quarto-dashboards/1-hello-dashboards/)
+-   Slides for this intro: [mine.quarto.pub/quarto-dashboards-rmed](mine.quarto.pub/quarto-dashboards-rmed)
 
--   Source code for slides: [github.com/mine-cetinkaya-rundel/quarto-dashboards](https://github.com/mine-cetinkaya-rundel/quarto-dashboards)
+- Source code for slides: [github.com/mine-cetinkaya-rundel/quarto-dashboards-rmed/blob/main/index.qmd](https://github.com/mine-cetinkaya-rundel/quarto-dashboards-rmed/blob/main/index.qmd)
 
-## 🏁 Start {.smaller}
+## 🏁 Start
 
 If you would like to follow along or work on it yourself later
 
@@ -322,9 +320,7 @@ If you would like to follow along or work on it yourself later
 
 Our goal is to create the following dashboard and then deploy to QuartoPub.
 
-```{=html}
-<iframe src="https://mine.quarto.pub/user-2025-dash/" title = "useR! 2025 dashboard" frameborder="1" height="575" width="1200"></iframe>
-```
+![](images/user-2025-dash.png)
 
 ## Thank you!
 
