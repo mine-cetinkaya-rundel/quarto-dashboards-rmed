@@ -214,13 +214,13 @@ program_virtual_themes <- program_virtual |>
 
 ggplot(program_virtual_themes, aes(label = keywords, size = n, color = n)) +
   geom_text_wordcloud_area(rm_outside = TRUE) +
-  scale_size_area(max_size = 60) +
+  scale_size_area(max_size = 50) +
   theme_minimal() +
   scale_color_gradient(low = "#b6ea8a", high = "#65b621")
 
 ggplot(program_virtual_themes, aes(label = keywords, size = n, color = n)) +
   geom_text_wordcloud_area(rm_outside = TRUE) +
-  scale_size_area(max_size = 60) +
+  scale_size_area(max_size = 50) +
   theme_minimal() +
   theme(plot.background = element_rect(fill = "#323232", color = "#323232")) +
   scale_color_gradient(low = "#b6ea8a", high = "#ffffff")
