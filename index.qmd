@@ -15,7 +15,7 @@ format:
 
 ## Quarto
 
--   is a (relatively) new, open-source, scientific, and technical publishing system
+-   an open-source, scientific, and technical publishing system
 -   aims to make the process of creating and collaborating dramatically better
 
 ## Quarto ➝ many outputs {background-image="images/quarto-to-docs.png"}
@@ -322,6 +322,22 @@ If you would like to follow along or work on it yourself later
 Our goal is to create the following dashboard and then deploy to QuartoPub.
 
 ![](images/user-2025-dash.png){width=750px fig-align="center"}
+
+## ✅ Solutions
+
+All files needed to build the dashboard can be found at:
+
+<br>
+
+::: {.center-align}
+🔗 [github.com/mine-cetinkaya-rundel/quarto-dashboards-rmed](https://github.com/mine-cetinkaya-rundel/quarto-dashboards-rmed)
+:::
+
+<br>
+
+- `useR25.qmd`: Quarto file for the dashboard
+- `brand/`: Theming files (`dark-brand.yml`, `light-brand.yml`, `logo.png`)
+- `data/`: `program.csv`
 
 ## Thank you! {.nostretch}
 
