@@ -25,6 +25,30 @@ program <- read_csv("data/program.csv")
 ```
 
 ```{r}
+#| label: colors
+
+# yellow
+keynote_color <- "#FFD960"
+
+# blue
+blue <- "#2165B6"
+tutorial_color <- paste0(blue, "80")
+talk_color <- paste0(blue, "60")
+lightning_talk_color <- paste0(blue, "20")
+light_blue <- "#A0b9E2"
+
+# grey
+poster_color <- "#E2E6ED50"
+dark_grey <- "#323232"
+
+# green
+green <- "#65B621"
+virtual_talk_color <- paste0(green, "60")
+virtual_lightning_talk_color <- paste0(green, "20")
+light_green <- "#C0ED9B"
+```
+
+```{r}
 #| label: helper-make-schedule
 make_schedule <- function(x, color){
   
@@ -63,13 +87,13 @@ make_schedule <- function(x, color){
 gt_theme_dark_alt <- function(gt_object, ...) {
   gt_object |>
     tab_options(
-      table.background.color = "#323232",
+      table.background.color = dark_grey,
       table.font.color.light = "white",
-      table.border.bottom.color = "#323232",
-      table.border.left.color = "#323232",
-      table.border.right.color = "#323232",
-      table_body.border.bottom.color = "#323232",
-      column_labels.background.color = "#323232",
+      table.border.bottom.color = dark_grey,
+      table.border.left.color = dark_grey,
+      table.border.right.color = dark_grey,
+      table_body.border.bottom.color = dark_grey,
+      column_labels.background.color = dark_grey,
       column_labels.border.bottom.color = "white",
       ...
     )
@@ -106,12 +130,6 @@ program_inperson <- program |>
 
 program_inperson_counts <- program_inperson |>
   count(session_simplified)
-
-keynote_color <- "#FFD960"
-tutorial_color <- "#2165b680"
-talk_color <- "#2165b660"
-lightning_talk_color <- "#2165b620"
-poster_color <- "#E2E6ED50"
 ```
 
 ```{r}
@@ -187,7 +205,7 @@ session_counts_per_day_inperson_plot <- program_inperson |>
     )
   ) |>
   ggplot(aes(y = fct_rev(session_simplified), x = n, fill = session_simplified)) +
-  geom_col(show.legend = FALSE, color = "#2165b6") +
+  geom_col(show.legend = FALSE, color = blue) +
   facet_wrap(~date, ncol = 3) +
   labs(x = NULL, y = NULL) +
   scale_fill_manual(
@@ -202,7 +220,7 @@ session_counts_per_day_inperson_plot <- program_inperson |>
   theme_minimal() +
   theme(
     panel.grid.major.y = element_blank(),
-    strip.background = element_rect(fill = poster_color, color = "#FFFFFF")
+    strip.background = element_rect(fill = poster_color, color = "white")
   )
 
 # light
@@ -211,9 +229,9 @@ session_counts_per_day_inperson_plot
 # dark
 session_counts_per_day_inperson_plot +
   theme(
-    plot.background = element_rect(fill = "#323232", color = "#323232"),
-    axis.text.y = element_text(color = "#ffffff"),
-    strip.text = element_text(color = "#ffffff")
+    plot.background = element_rect(fill = dark_grey, color = dark_grey),
+    axis.text.y = element_text(color = "white"),
+    strip.text = element_text(color = "white")
   )
 ```
 
@@ -240,12 +258,12 @@ ggplot(program_inperson_themes, aes(label = keywords, size = n, color = n)) +
 
 # light
 keyword_wordcloud_inperson_plot +
-  scale_color_gradient(low = "#81a3d9", high = "#3564b0")
+  scale_color_gradient(low = light_blue, high = blue)
 
 # dark
 keyword_wordcloud_inperson_plot +
-  theme(plot.background = element_rect(fill = "#323232", color = "#323232")) +
-  scale_color_gradient(low = "#81a3d9", high = "#ffffff")
+  theme(plot.background = element_rect(fill = dark_grey, color = dark_grey)) +
+  scale_color_gradient(low = light_blue, high = "white")
 ```
 
 ## Column - Virtual {width="30%"}
@@ -273,7 +291,7 @@ program_virtual_counts <- program_virtual |>
 #| title: "Talks"
 list(
   icon = "mic",
-  color = "#65b62160",
+  color = virtual_talk_color,
   value = program_virtual_counts |> filter(session == "Virtual") |> pull(n)
 )
 ```
@@ -286,7 +304,7 @@ list(
 #| title: "Lightning Talks"
 list(
   icon = "lightning",
-  color = "#65b62120",
+  color = virtual_lightning_talk_color,
   value = program_virtual_counts |> filter(session == "Virtual Lightning") |> pull(n)
 )
 ```
@@ -313,12 +331,12 @@ keyword_wordcloud_virtual_plot <- ggplot(program_virtual_themes, aes(label = key
 
 # light
 keyword_wordcloud_virtual_plot +
-  scale_color_gradient(low = "#b6ea8a", high = "#65b621")
+  scale_color_gradient(low = light_green, high = green)
 
 # dark
 keyword_wordcloud_virtual_plot +
-  scale_color_gradient(low = "#b6ea8a", high = "#ffffff") +
-  theme(plot.background = element_rect(fill = "#323232", color = "#323232"))
+  scale_color_gradient(low = light_green, high = "white") +
+  theme(plot.background = element_rect(fill = dark_grey, color = dark_grey))
 ```
 
 # Schedule
@@ -347,12 +365,12 @@ The following talks are virtual and will be streamed on YouTube Live.
 
 # light
 virtual |>
-  make_schedule(color = "#65b621") |>
+  make_schedule(color = green) |>
   cols_hide(columns = room)
 
 # dark
 virtual |>
-  make_schedule(color = "#65b621") |>
+  make_schedule(color = green) |>
   cols_hide(columns = room) |>
   gt_theme_dark_alt()
 ```
@@ -374,10 +392,10 @@ day_1_updated <- bind_rows(
   mutate(room = if_else(session == "Keynote #1", "Gross Hall 270", room))
 
 # light
-make_schedule(day_1_updated, color = "#2165b6")
+make_schedule(day_1_updated, color = blue)
 
 # dark
-make_schedule(day_1_updated, color = "#2165b6") |>
+make_schedule(day_1_updated, color = blue) |>
   gt_theme_dark_alt()
 ```
 :::
@@ -391,10 +409,10 @@ The following tutorials and posters will be presented in person at Duke Universi
 #| renderings: [light, dark]
 
 # light
-make_schedule(day_2, color = "#2165b6")
+make_schedule(day_2, color = blue)
 
 # dark
-make_schedule(day_2, color = "#2165b6") |>
+make_schedule(day_2, color = blue) |>
   gt_theme_dark_alt()
 ```
 :::
@@ -408,10 +426,10 @@ The following tutorials and posters will be presented in person at Duke Universi
 #| renderings: [light, dark]
 
 # light
-make_schedule(day_3, color = "#2165b6")
+make_schedule(day_3, color = blue)
 
 # dark
-make_schedule(day_3, color = "#2165b6") |>
+make_schedule(day_3, color = blue) |>
   gt_theme_dark_alt()
 ```
 :::
