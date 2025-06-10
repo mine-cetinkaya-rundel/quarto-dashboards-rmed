@@ -31,7 +31,7 @@ program <- program_interim |>
     info = if_else(
       session == "Poster",
       paste0(
-      "<a style='color:#2165b6;'>**",title,"**</a>", 
+      "<span style='color:#2165b6;'>**",title,"**</span>", 
       "<br><br><details><summary>More info</summary>", 
       "<p style='font-size:90%;'>", 
       content, 
@@ -43,7 +43,7 @@ program <- program_interim |>
       "</details>"
       ),
       paste0(
-      "<a style='color:#2165b6;'>**",title,"**</a>", 
+      "<span style='color:#2165b6;'>**",title,"**</span>", 
       "<br><br><details><summary>More info</summary>", 
       "<p style='font-size:90%;'>", 
       content, 
@@ -65,14 +65,3 @@ program <- program_interim |>
 # write data without emails ---------------------------------------------------
 
 write_csv(program, "data/program.csv")
-
-
-# save for later
-
-program |>
-  separate_longer_delim(speakers, delim = "; ") |>
-  select(id, speakers) |>
-  separate_wider_delim(speakers, delim = " (", names = c("speaker", "speaker_affiliation"), too_few = "align_start", too_many = "merge") |>
-  mutate(speaker_affiliation = str_remove(speaker_affiliation, "\\)")) |>
-  group_by(id) |>
-  mutate(speakers = glue_collapse(speaker, sep = "; "))
