@@ -1,0 +1,4 @@
+- source: useR25.qmd
+  quarto-pub:
+    - id: e3108888-3cc9-4c76-a5ab-78f9bdcb2826
+      url: https://mine.quarto.pub/user-2025-dash
