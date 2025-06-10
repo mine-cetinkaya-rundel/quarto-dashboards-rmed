@@ -12,7 +12,6 @@ library(tidyverse)
 library(scales)
 library(ggwordcloud)
 library(gt)
-set.seed(1234)
 ```
 
 ```{r}
@@ -152,9 +151,8 @@ program_inperson_themes <- program_inperson |>
   count(keywords, sort = TRUE) |>
   filter(n > 1) # instances of more than 1 appearance only
 
-keyword_wordcloud_inperson_plot <- 
-ggplot(program_inperson_themes, aes(label = keywords, size = n, color = n)) +
-  geom_text_wordcloud_area(rm_outside = TRUE) +
+keyword_wordcloud_inperson_plot <- ggplot(program_inperson_themes, aes(label = keywords, size = n, color = n)) +
+  geom_text_wordcloud_area(rm_outside = TRUE, seed = 123) +
   scale_size_area(max_size = 30) +
   theme_void()
 
@@ -189,7 +187,7 @@ program_virtual_themes <- program_virtual |>
   filter(n > 1)
 
 keyword_wordcloud_virtual_plot <- ggplot(program_virtual_themes, aes(label = keywords, size = n, color = n)) +
-  geom_text_wordcloud_area(rm_outside = TRUE) +
+  geom_text_wordcloud_area(rm_outside = TRUE, seed = 123) +
   scale_size_area(max_size = 50) +
   theme_minimal()
 
